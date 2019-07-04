@@ -1,9 +1,19 @@
 <template>
-  <label>
-    Search:
-    <input type="text" id="search-bar" v-model="keyword" v-on:keyup.enter="setKeyword">
-    <button type="submit" @click="setKeyword" value="">Search</button>
-  </label>
+  <div>
+    <label>
+      Search:
+      <input type="text" id="search-bar" v-model="keyword" v-on:keyup.enter="setKeyword">
+      <button type="submit" @click="setKeyword" value="">Search</button>
+    </label>
+    <div>
+      <ul style="list-style-type: none">
+        <li v-for="result in filteredData">
+          <p> {{ result.keyword }}</p>
+          <p> {{ result.url }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -19,7 +29,12 @@
     methods: {
       setKeyword() {
         this.$store.dispatch("callChangeKeywordMutation", {keyword: this.keyword})
-        this.$store.dispatch("callFilterListMutation")
+        // this.$store.dispatch("callFilterListMutation")
+      }
+    },
+    computed: {
+      filteredData() {
+        return this.$store.getters.filteredList(this.keyword)
       }
     }
   }
