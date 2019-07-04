@@ -1,16 +1,12 @@
 <template>
   <div>
-    <label>
-      Search:
-      <input type="text" id="search-bar" v-model="keyword" v-on:keyup.enter="setKeyword">
-      <button type="submit" @click="setKeyword" value="">Search</button>
-    </label>
+    <form>
+      <input type="text" placeholder="키워드를 입력하세요." id="search-bar" v-model="keyword" v-on:keyup.enter="setKeyword">
+      <button type="button" @click="setKeyword" value="">Search</button>
+    </form>
     <div>
       <ul style="list-style-type: none">
-        <li v-for="result in filteredData">
-          <p> {{ result.keyword }}</p>
-          <p> {{ result.url }}</p>
-        </li>
+        <li v-for="result in filteredData">{{ result.keyword }} : {{ result.url }}</li>
       </ul>
     </div>
   </div>
@@ -21,19 +17,18 @@
     name: "SearchBar",
     data() {
       return {
-        // keyword: 검색 키워드, link: 결과 URL
         keyword: '',
       }
     },
-    // govJson from App.vue
     methods: {
       setKeyword() {
+        // call mutation to change keyword
         this.$store.dispatch("callChangeKeywordMutation", {keyword: this.keyword})
-        // this.$store.dispatch("callFilterListMutation")
       }
     },
     computed: {
       filteredData() {
+        // call getter to filter list by keyword
         return this.$store.getters.filteredList(this.keyword)
       }
     }
@@ -41,5 +36,15 @@
 </script>
 
 <style scoped>
+  form {
+    align-itemsi: center;
+  }
+  input {
+    font-family: saeng;
+    text-align: center;
+  }
 
+  p {
+    font-family: saeng;
+  }
 </style>
