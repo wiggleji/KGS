@@ -1,9 +1,12 @@
 <template>
+  <div>
   <label>
     Search:
     <input type="text" id="search-bar" v-model="keyword" v-on:keyup.enter="setKeyword">
     <button type="submit" @click="setKeyword" value="">Search</button>
   </label>
+  <div>{{filteredData}}</div>
+  </div>
 </template>
 
 <script>
@@ -19,7 +22,12 @@
     methods: {
       setKeyword() {
         this.$store.dispatch("callChangeKeywordMutation", {keyword: this.keyword})
-        this.$store.dispatch("callFilterListMutation")
+        // this.$store.dispatch("callFilterListMutation")
+      }
+    },
+    computed: {
+      filteredData() {
+        return this.$store.getters.filteredList(this.keyword)
       }
     }
   }

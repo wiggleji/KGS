@@ -17,22 +17,21 @@ const store = new Vuex.Store({
     changeKeyword(state, payload) {
       state.keyword = payload
     },
-    filterList(state) {
-      state.filteredList = state.govJson.filter(e => e.keyword.includes(state.keyword))
-    }
   },
   actions: {
     // async function, can change data
     callChangeKeywordMutation(store, keyword) {
       store.commit('changeKeyword', keyword)
     },
-    callFilterListMutation(store) {
-      store.commit('filterList')
-    }
+    // callFilterListMutation(store) {
+    //   store.commit('filterList')
+    // }
   },
   getters: {
-    FilteredList(state) {
-      return state.filteredList
+    filteredList: (state) => (keyword) => {
+      return state.govJson.filter(el => {
+        return el.keyword.includes(keyword)
+      })
     }
   },
   strict: true

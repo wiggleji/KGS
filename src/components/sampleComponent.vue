@@ -15,7 +15,7 @@
 
         <p>userID: {{ userId }}</p>
         <button @click="getData">yes</button>
-
+        <div>{{filteredData}}</div>
     </div>
 </template>
 
@@ -40,6 +40,11 @@
                 // promise 반환?
                 this.userId = jsonRes['data']['id']
             }
+        },
+        computed: {
+          filteredData() {
+            return this.$store.getters.filteredList(this.inputData)
+          }
         }
     }
 </script>
