@@ -1,8 +1,8 @@
 <template>
   <label>
     Search:
-    <input type="text" id="search-bar" v-model="keyword" v-on:keyup.enter="searchJson">
-    <button type="submit" @click="searchJson" value="">Search</button>
+    <input type="text" id="search-bar" v-model="keyword" v-on:keyup.enter="setKeyword">
+    <button type="submit" @click="setKeyword" value="">Search</button>
   </label>
 </template>
 
@@ -17,8 +17,9 @@
     },
     // govJson from App.vue
     methods: {
-      searchJson() {
-        this.$emit('keyword', this.keyword)
+      setKeyword() {
+        this.$store.dispatch("callChangeKeywordMutation", {keyword: this.keyword})
+        this.$store.dispatch("callFilterListMutation")
       }
     }
   }

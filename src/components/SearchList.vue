@@ -1,6 +1,6 @@
 <template>
   <ul style="list-style-type: none">
-    <li v-for="result in jsonResult">
+    <li v-for="result in filteredList">
       <p> {{ result.keyword }}</p>
       <p> {{ result.url }}</p>
     </li>
@@ -10,9 +10,10 @@
 <script>
   export default {
     name: "SearchList",
-    props: ['jsonResult'],
     methods: {
-
+      filteredList: function() {
+        return this.$store.getters.FilteredList()
+      }
     }
   }
 </script>
