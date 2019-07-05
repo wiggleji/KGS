@@ -27,12 +27,17 @@ const store = new Vuex.Store({
   getters: {
     filteredList: (state) => (keyword) => {
       // filter list by keyword
-      return state.govJson.filter(el => {
-        return el.keyword.includes(keyword)
-      })
+      if (keyword !== "") {
+        return state.govJson.filter(el => {
+            return el.keyword.includes(keyword)
+          }
+        )
+      }
     }
+    ,
   },
-  strict: true
+  strict:
+    true
 })
 
 export default store

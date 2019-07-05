@@ -23,11 +23,11 @@
 
 <style>
   @import "https://unpkg.com/papercss@1.6.1/dist/paper.min.css";
+  @import "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css";
   @font-face {
     font-family: 'saeng';
     src:url("./assets/SDMiSaeng.ttf")
   }
-
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -35,5 +35,9 @@
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+  }
+  div {
+    text-align: center;
+    margin: 0 auto;
   }
 </style>
